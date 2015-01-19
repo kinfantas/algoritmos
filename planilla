@@ -1,0 +1,130 @@
+// Planilla.cpp : Defines the entry point for the console application.
+//
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+
+#define MAX 100 //Declarar una constante por compilador 
+
+using namespace std;
+
+float impuesto (float sb);
+float AFP (float sb);
+float promedio(float sn[],int tam);
+int mayor(float sn[],int tam);
+int menor(float sn[],int tam);
+ 
+
+int main ()
+
+{  int cod[MAX],i=0,num;
+   string nombre[MAX];
+   float sb[MAX],imp[MAX],afp[MAX],sn[MAX],a[MAX];
+
+// Pide numero de empleados
+
+   do {
+         cout<< "Ingrese numero de empleados:";
+         cin>>num;
+   } while ((num>MAX)||(num<=0));
+
+//ciclo repetitivo
+   for (int i=0;i<num;i++)
+   {do {
+      cout<<"Ingrese el codigo del empleado: \n";
+      cin>>cod[i];
+
+   }while(((cod[i]<=0)||(cod[i]>=200)));
+   
+   // Ingreso de teclado de un string
+   cout<<"Ingrese el nombre: ";
+   getline(cin,nombre[i]);
+   do
+     {
+       cout <<"Ingrese el salario bruto: \n";
+       cin>>sb[i];
+   }while ((sb[i]<=0)||(sb[i]>=16000));
+
+   if(sb[i]>2800)
+   {
+     imp[i]=impuesto (sb[i]);
+     afp[i]=AFP(sb[i]);
+     sn[i]=sb[i]-imp[i]-afp[i];
+     if(sb[i]>10000)
+        {a[i]=0.01*sb[i];
+         sn[i]=sn[i]-a[i];
+            }
+     else
+         a[i]=0;
+   }
+   else
+   {
+      imp[i]=0;
+      afp[i]=0;
+      a[i]=0;
+      sn[i]=sb[i];
+   }
+  }
+  cout<<"------Planilla de sueldos-----"<<"\n";
+  cout<<"Codigo"<<"\t"<<"Nombre"<<"\t"<<"Sal.Bruto"<<"\t"<<"Impuestos"<<"\t"<<"Afp"<<"\t"<<"Otro"<<"\t"<<"Sal.Neto"<<"\n";
+  for(int c=0;c<num;c++)
+  { cout<<cod[c]<<"\t"<<nombre[c]<<"\t"<<sb[c]<<"\t"<<imp[c]<<"\t"<<afp[c]<<"\t"<<a[c]<<"\t"<<sn[c]<<"\n";
+
+  }
+  cout<<"Promedio de salario neto: "<<promedio(sn,num);
+  int m=mayor(sn,num);
+  int men=menor(sn,num);
+  cout<<"Mayor salario: "<<nombre[m]<< " con el salario: "<<sn[m];
+  cout<<"Menor salario: "<<nombre[men]<< " con el salario: "<<sn[men];
+
+  cout<<"Gracias \n";
+  getch();
+
+  return 0;
+
+}
+
+ 
+float impuesto (float sb)
+{return sb*0.13;
+}
+
+float AFP (float sb)
+{return sb*0.121;
+}
+float promedio(float sn[],int tam)
+{
+	int i;
+	float prom, suma=0;
+	for (i=0;i<tam;i++)
+		suma=suma+sn[i];
+	prom=suma/tam;
+	return prom;
+}
+
+int mayor(float sn[],int tam)
+{
+	float may=0;
+	int pos;
+	for (int i=0;i<tam;i++)
+		if (may<sn[i])
+		{
+			may=sn[i];
+			pos=i;
+		}
+	return pos;
+}
+
+int menor(float sn[],int tam)
+{
+	float men=sn[0];
+	int pos=0;
+	for (int i=1;i<tam;i++)
+		if (men>sn[i])
+		{
+			men=sn[i];
+	        pos=i;
+		}
+	return pos ;
+}
