@@ -1,0 +1,46 @@
+// tax.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"	
+#include <iostream>
+#define iva 0.13
+#define afp 0.121
+#define salariominimo 1400
+
+using namespace std;
+
+float calculo_salarioneto(float salariobruto);
+
+void main()
+{
+   float salariobruto, salarioneto, promedio, s = 0,n;
+   do {
+     cout << "ingrese numero de empleados: ";
+     cin >> n;
+   } while (n <= 0);
+   for (int i = 1; i <= n; i++)
+   {
+	  do {
+      cout << "ingrese salario bruto: ";
+      cin >> salariobruto;
+	  } while ((salariobruto <= 1400) || (salariobruto <= 0));
+      if (salariobruto > 2 * salariominimo)
+         salarioneto = calculo_salarioneto(salariobruto);
+      else
+         salarioneto = salariobruto;
+      cout << "salario neto es: " << salarioneto<<endl;
+      s = s + salarioneto;
+   }
+   promedio = s / n;
+   cout << "el promedio es: " << promedio;
+   _getch();
+}
+
+float calculo_salarioneto(float salariobruto)
+{
+   float x;
+   x = salariobruto - (salariobruto*afp+iva);
+   return x;
+}
+
