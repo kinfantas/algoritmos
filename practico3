@@ -407,6 +407,7 @@ getch();
 return(1);
 }
 
+// Matriz de matriz
 #include <iostream>
 #include <conio.h>
 #include <string.h>
@@ -421,11 +422,12 @@ struct telemento
 
 void llenar_auto(telemento M[fil][col], int n)
 {int i,j,k,l;
-srand(time(NULL));
+srand(time(NULL)); // Genera los números randomicamente
 	for(i=0;i<n;i++)
 		{for(j=0;j<n;j++)
 			{for(k=0;k<n;k++)
 				{for(l=0;l<n;l++)
+				// Referencia a la matriz dentro de la matriz
 					{M[i][j].mat[k][l]=rand() %10;
 					}
 				}
