@@ -1,0 +1,102 @@
+// proyecto.cpp : Defines the entry point for the console application.
+//autor: paula cronenbold
+
+//librerias
+
+#include "stdafx.h"
+#include "conio.h"
+#include "stdlib.h"
+#include <iostream>
+
+
+using namespace std;
+
+//Prototipo de funciones
+void triangulo();
+void mayor();
+bool primo();
+
+//cuerpo principal
+int main ()
+
+{ int opcion;
+  do
+  {cout<<"Menu \n";
+   cout<<"1.-Area del triangulo \n";
+   cout<<"2.-Numero Mayor \n";
+   cout<<"3.-Numero Primo \n";
+   cout<<"0.-Salir \n";
+   cout<<"Opcion: ";
+   cin>>opcion;
+   switch(opcion)
+   {
+   case 1:
+ 	 triangulo();
+	 break;
+   case 2:
+	 mayor();
+	 break;
+   case 3:
+	 if (primo())
+		 cout<<"El numero es primo" ;
+	 break;
+   case 0:
+	 cout<<"salir\n";
+	 break;
+   default: 
+	 cout<<"Opcion invalida";
+  }
+   getch();
+   system("cls");
+  }while(opcion!=0);
+
+   return 0;
+}
+
+void triangulo()
+{ int a,b,h;
+  cout<< "Ingresar base:";
+  cin>>b;
+  cout<< "Ingresar altura:";
+  cin>>h;
+  a = (b*h)/2;
+  cout<< "El area es:"<<a;
+}
+
+void mayor()
+{ int a,b,c;
+  cout<< "Ingresar primer numero: \n";
+  cin >> a;
+  cout << "Ingresar segundo numero: \n";
+  cin >> b;
+  cout<< "Ingresar tercer numero: \n";
+  cin >> c;
+  if (a>b)
+	if (a>c)
+		cout<<"El mayor es: "<<a;
+	else
+		cout<<"El mayor es: "<<c;
+  else
+	if (b>c)
+		cout<<"El mayor es: "<<b;
+	else
+		cout<<"El mayor es: "<<c;
+}
+
+bool primo()
+{ bool k;
+  int c;
+  k=true;
+  c=0;
+  int n, i;
+  cout<<"Ingrese el numero: ";
+  cin>>n;
+  for( i=1;i<=n-1;i++)
+  {
+	  if(n%i==0)
+       c++;
+  }
+  if (c>1)
+   k=false;
+  return(k);
+}
