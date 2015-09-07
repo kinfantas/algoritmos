@@ -1,0 +1,90 @@
+// menufunciones.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include "math.h"
+
+float cubo(float n);
+int menor_numeros(int x,int y);
+float potencia_numeros(int b, int a);
+
+using namespace std;
+
+float c;
+void main ()
+{ float n,c,p,a,b;
+  int opcion,m,x,y;
+  do{
+	  cout<<"*****MENU*****"<<endl;
+	  cout<<"1. Sacar el cubo de un numero cualquiera"<<endl;
+	  cout<<"2. Sacar el menor de dos numeros enteros"<<endl;
+	  cout<<"3. Sacar la potencia de un numero"<<endl;
+	  cout<<"0. Salir"<<endl;
+	  cout<<"Elija la opcion que prefiera"<<endl;
+	  cin>>opcion;
+	  switch(opcion)
+	  {case 1: 
+	          cout<<"Ingrese el numero que quiera sacar el cubo";
+			  cin>>n;
+			  c = cubo(n);
+			  cout<<"El cubo del numero"<<n<<endl<<"es: "<<c;
+			  break;
+
+	  case 2:
+		  cout<<"Ingresar el primer numero: ";
+		  cin>>x;
+		  cout<<"Ingrese el segundo numero: ";
+		  cin>>y;
+		  m = menor_numeros(x,y);
+		  cout<<"El menor de los dos numeros es: "<<m;
+		  break;
+
+	  case 3:
+		  cout<<"Elegir la base: ";
+		  cin>>b;
+		  cout<<"Elegir la potencia: ";
+		  cin>>a;
+		  p = potencia_numeros(b,a);
+		  cout<<"La potencia es: "<<p;
+		  break;
+
+	  case 0:
+		  cout<<"Salir";
+		  break;
+
+	  default:
+		  cout<<"ERROR";
+		  break;
+
+	  }
+	  getch ();
+	  system ("cls");
+  }while(opcion != 0);
+  getch ();
+}
+
+float cubo (float n)
+{c = pow(n,3);
+return c;
+}
+
+int menor_numeros(int x, int y)
+{int m;
+ if(x>y)
+ {m = y;
+ }
+ else
+ {m=x;
+ }
+ return m;
+}
+
+float potencia_numeros(int b, int a)
+{int p = 1;
+ for(int i=1;i<=a;i++)
+ {p=p*b;
+ }
+ return p;
+}
