@@ -1,0 +1,16 @@
+int busquedaBinaria(int A[], int n, int k)
+{
+  int fin = tamano-1,ini = 0,medio;
+  while (ini <= fin)
+    {
+      medio = (fin + ini)/2;
+      if (arreglo[medio] == k)
+         return medio;
+      else
+         if (k < arreglo[medio])
+            fin=ini-1;
+         else
+            ini=medio+1;
+    }
+  return -1;
+}
