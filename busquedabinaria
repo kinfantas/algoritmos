@@ -8,7 +8,7 @@ int busquedaBinaria(int A[], int n, int k)
          return medio;
       else
          if (k < arreglo[medio])
-            fin=ini-1;
+            fin=medio-1;
          else
             ini=medio+1;
     }
