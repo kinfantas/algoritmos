@@ -1,0 +1,37 @@
+Void mezclar( int v1[],int n1,int v2[],int n2,int v3[],int n3)
+{
+while((c1<n1)&&(c2<n2))
+ {          
+  if(v1[c1]<v2[c2])
+  {
+   v3[c3]=v1[c1];
+   c1++;
+  }
+  else
+  {
+   v3[c3]=v2[c2];
+   c2++;
+  }
+  c3++;
+ }
+ if(c1==n1)
+ {
+  for(i=c2;i<n2;i++)
+  {
+   v3[c3]=v2[i];
+   c3++;
+  }
+ }
+ else
+ {
+  for(i=c1;i<n1;i++)
+  {
+   v3[c3]=v1[i];
+   c3++;
+  }
+ }
+ for(i=0;i<n1+n2;i++)
+ {
+  cout<<v3[i]<<"\n";
+ }
+ getch();
