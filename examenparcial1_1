@@ -1,0 +1,106 @@
+// examenparcial.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+#define TAM 50
+
+using namespace std;
+
+void cargar_vector (int vec [], int n);
+void mostrar_vector (int vec [], int n);
+void ordenar_vector (int vec [], int n);
+void mezclar (int v1[], int n1, int v2[],int n2, int v3[],int &c3);
+
+void main ()
+{
+	int v1[TAM],v2[TAM],v3[TAM],n,m,p;
+	do {
+	    cout << "ingrese el numero de elementos :" << endl;
+	    cin >> n;
+	} while (n>=TAM);
+	cargar_vector (v1,n);
+	ordenar_vector (v1,n);
+	do {
+	    cout << "ingrese el numero de elementos :" << endl;
+	    cin >> m;
+	} while (m>=TAM);
+    cargar_vector (v2,m);
+	ordenar_vector (v2,m);
+
+	mezclar (v1,n,v2,m,v3,p);
+
+	mostrar_vector (v3,p);
+
+	getch ();
+}
+
+void cargar_vector(int vec [], int n)
+{
+	int i;
+	for(i=0;i<n;i++)
+	{ cout << "ingrese el vec [" << i << "]= " ;
+	  cin >> vec [i];
+	}
+	getch ();
+}
+void mostrar_vector (int vec[], int n)
+{ 
+	int i;
+	for(i=0;i<n;i++)
+	{ cout << "vec [" << i << "]= " ;
+	  cout << vec [i] << endl;
+	}
+	getch ();
+
+}
+
+void ordenar_vector (int vec[], int n)
+{
+	int i,j,aux;
+	 for (i=0;i<n-1;i++)
+	       for (j=i+1;j<n;j++)
+			   if (vec[i]>vec[j])
+			   { aux=vec[j];
+	             vec[j]=vec[i];
+				 vec[i]=aux;
+	           }
+}
+
+void mezclar( int v1[],int n1,int v2[],int n2,int v3[],int &c3)
+{
+	int i,c1=0, c2=0;
+	c3=0;
+	while((c1<n1)&&(c2<n2))
+	{          
+		if(v1[c1]<v2[c2])
+		{
+			v3[c3]=v1[c1];
+			c1++;
+		}
+		else
+		{
+			v3[c3]=v2[c2];
+			c2++;
+		}
+		c3++;
+	}
+	if(c1==n1)
+	{
+		for(i=c2;i<n2;i++)
+		{
+			v3[c3]=v2[i];
+			c3++;
+		}
+	}
+	else
+	{
+		for(i=c1;i<n1;i++)
+		{
+			v3[c3]=v1[i];
+			c3++;
+		}
+	}
+}
