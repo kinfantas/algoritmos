@@ -1,0 +1,73 @@
+// parcial1_2.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+
+#define TAM 50
+
+using namespace std;
+
+struct tamigos {
+   string nombre;
+   int edad;
+};
+
+void cargar_vector (tamigos vec[], int n);
+void mostrar_vector (tamigos vec[], int n);
+void ordenar_vector (tamigos vec[], int n);
+
+void main()
+{
+   int n;
+   tamigos amigos[TAM];
+   do {
+	    cout << "ingrese el numero de elementos :" << endl;
+	    cin >> n;
+   } while ((n>=TAM)||(n<=0));
+   cargar_vector (amigos,n);
+   ordenar_vector (amigos,n);
+   mostrar_vector (amigos,n);
+   getch();
+}
+
+void cargar_vector(tamigos vec [], int n)
+{
+	int i;
+	string tempo;
+	cin.ignore();
+	for(i=0;i<n;i++)
+	{ cout << "ingrese el nombre [" << i << "]= " ;
+	  getline(cin,tempo);
+	  vec[i].nombre=tempo;
+	  cout << "ingrese edad [" << i << "]= " ;
+	  cin>>vec[i].edad;
+	}
+	getch ();
+}
+void mostrar_vector (tamigos vec[], int n)
+{ 
+	int i;
+	for(i=0;i<n;i++)
+	{ cout << "vec [" << i << "]= " ;
+	  cout << vec [i].nombre << endl;
+	  cout << vec [i].edad << endl;
+	}
+	getch ();
+
+}
+
+void ordenar_vector (tamigos vec[], int n)
+{
+	int i,j;
+	tamigos aux;
+	 for (i=0;i<n-1;i++)
+	       for (j=i+1;j<n;j++)
+			   if (vec[i].edad>vec[j].edad)
+			   { aux=vec[j];
+	             vec[j]=vec[i];
+				 vec[i]=aux;
+	           }
+}
