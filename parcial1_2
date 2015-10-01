@@ -44,6 +44,7 @@ void cargar_vector(tamigos vec [], int n)
 	  vec[i].nombre=tempo;
 	  cout << "ingrese edad [" << i << "]= " ;
 	  cin>>vec[i].edad;
+	  cin.ignore();  //Dado que se pide ingresar la edad con cin
 	}
 	getch ();
 }
