@@ -1,0 +1,21 @@
+// EjemploFuncion.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void area_cuadrado (float a, float &area);
+int main (){
+	float a,area;
+	cout<<"intoducir datos : ";
+	cin>>a;
+	area_cuadrado(a,area);
+	cout<<"El area es: "<<area;
+	return 0;
+}
+void area_cuadrado(float a, float &area)
+{    area=a*a;
+}
