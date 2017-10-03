@@ -2,6 +2,7 @@
 #include <iostream>
 #include "conio.h"
 #include <string>
+#include "stdlib.h"
 #define MAX 6
 
 using namespace std;
@@ -10,14 +11,15 @@ struct tintereses
 {int numero;
  string interes;
  string descripcion;
+ int estado;
 };
 
 tintereses V[MAX];
 
 int insertar();
 void listar(int N);
-void consultar();
-void modificar();
+void consultar(int N);
+void modificar(int N);
 void borrar();
 void clasificar();
 
@@ -32,16 +34,16 @@ do{
   cout<<"\n [5]---> Borrar";
   cout<<"\n [6]---> Clasificar los datos";
   cout<<"\n [0]---> Salir";
-  cout<<"Ingrese la opcion";
+  cout<<"\n Ingrese la opcion: ";
   cin>>opc;
   switch(opc)
   {	case 1:N=insertar();
          break;
-	case 2:listar();
+	case 2:listar(N);
 	     break;
-	case 3:consultar();
+	case 3:consultar(N);
 	     break;
-	case 4:modificar();
+	case 4:modificar(N);
 	     break;
 	case 5:borrar();
 	     break;
@@ -52,6 +54,8 @@ do{
 	default:cout<<"error";
 	     break;
   }
+  getch();
+  system("cls");
  }while(opc!=0);
 getch();
 }
@@ -68,13 +72,11 @@ int insertar()
 		getline(cin,V[i].interes);
 		cout<<"Ingrese la descripcion: "<<endl;
 		getline(cin,V[i].descripcion);
+		V[i].estado=0;
 		getch();
 	}
 	return N;
 }
-
-
-
 
 void listar(int N)
 {
@@ -83,18 +85,82 @@ void listar(int N)
 	cout<<"Interes"<<"\t";
 	cout<<"Descripcion"<<"\t"<<endl;
 	for(int i=0;i<N;i++)
-	{	cout<<V[i].numero<<"\t";
-		cout<<V[i].interes<<"\t";
-		cout<<V[i].descripcion<<i<<"\t";
+	{	if (V[i].estado !=9)
+		{   cout<<V[i].numero<<"\t";
+			cout<<V[i].interes<<"\t";
+			cout<<V[i].descripcion<<endl;
+	    }
 	}
 }
 
+void consultar(int N)
+{
+	int idElemento;
+	bool band = true;
+	cout << "Ingrese el elemento a consultar: ";
+	cin >> idElemento;
+	for(int i=0;i<N;i++){
+		if(V[i].numero == idElemento){
+			cout << "Interes: " << V[i].interes;
+			cout << "\tDescripcion: " << V[i].descripcion;
+			band = false;
+		}
+	}
+	if (band != false)
+		cout << "Elemento Ingresado No Encontrado en la base de Datos. " << endl;
+}
 
+void modificar(int N)
+{int idElemento;
+    bool band = true;
+	char resp;
+	cout << "Ingrese el elemento a modificar: ";
+	cin >> idElemento;
+	for(int i=0;i<N;i++){
+		if(V[i].numero == idElemento){
+			band = false;
+			cout << "Interes: " << V[i].interes<<endl;
+			cout << "Desea modificar el dato: (coloque s): ";
+			cin>>resp;
+			cin.ignore();
+			if (resp=='s')
+			{	
+			    cout << "Ingrese el nuevo dato:";
+				getline(cin,V[i].interes);
+			}
+			cout << "Descripcion: " << V[i].descripcion<<endl;
+			cout << "Desea modificar el dato: (coloque s): ";
+			cin>>resp;
+			cin.ignore();
+			if (resp=='s')
+			{	
+			    cout << "Ingrese el nuevo dato: ";
+				getline(cin,V[i].descripcion);
+			}
+		}
+	}
+	if (band != false)
+		cout << "Elemento Ingresado No Encontrado en la base de Datos. " << endl;
+}
 
-
+void borrar()
+{
+	// Borrar logico
+	int idElemento;
+	bool band = true;
+	cout << "Ingrese el elemento a borrar: ";
+	cin >> idElemento;
+	for(int i=0;i<N;i++){
+		if(V[i].numero == idElemento){
+			V[i].estado=9;
+			band = false;
+		}
+	}
+	if (band != false)
+		cout << "Elemento Ingresado No Encontrado en la base de Datos. " << endl;
 
 }
-void consultar();
-void modificar();
-void borrar();
-void clasificar();
+
+void clasificar()
+{
+}
