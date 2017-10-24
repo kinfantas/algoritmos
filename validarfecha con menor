@@ -1,0 +1,132 @@
+# algoritmos
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include "conio.h"
+
+#define MAX 10
+
+using namespace std;
+
+struct testudiante
+{
+	int CI;
+	int registro;
+	string nombre;
+	string apellido;
+	string fecha_nacimiento;
+	char genero;
+	int estado;
+};
+
+testudiante dato[MAX]; 
+
+bool fechanacimiento(string fecha,string fechahoy);
+void adicionardato(int n);
+bool verificarhoy(int dd,int mm,int aa,string fechahoy);
+
+void main()
+{
+	int n; 
+	cout<<"ingresar el numero de estudiantes: ";
+	cin>>n;
+	adicionardato(n);
+	//getch();	
+}
+
+void adicionardato(int n)
+{	bool z;
+	for(int i=0;i<n;i++)
+	{
+		cout<<"ingresar el CI del estudiante: ";
+		cin>>dato[i].CI;
+		cout<<"ingresar el registro del estudiante: ";
+		cin>>dato[i].registro;
+		cin.ignore();
+		cout<<"ingresar el nombre del estudiante: ";
+		getline(cin,dato[i].nombre);
+		cout<<"ingresar el apellido del estudiante: ";
+		getline(cin,dato[i].apellido);
+		cout<<"ingresar la fecha de nacimiento del estudiante: ";
+		getline(cin,dato[i].fecha_nacimiento);
+		bool z=fechanacimiento(dato[i].fecha_nacimiento, "23/10/2017");
+		cout<<"ingresar el sexo del estudiante: ";
+		cin>>dato[i].genero;
+		//cout<<"ingresae el estado del estudiante";
+		dato[i].estado=0;
+		getch();
+	}
+}
+
+bool fechanacimiento(string fecha,string fechahoy)
+{
+	bool K=true; // Verdadera si es una fecha valida
+	if((fecha.at(2)=='/') && (fecha.at(5)=='/'))
+	{
+		int dd=(atoi(fecha.substr(0,2).c_str()));
+		int mm=(atoi(fecha.substr(3,2).c_str()));
+		int aa=(atoi(fecha.substr(6,4).c_str()));
+		if (mm<=12 && mm>0)
+			if(mm==1 || mm==3 || mm==5 || mm==7 || mm==8 || mm==10 || mm==12)
+			  if (dd>=1 && dd<=31)
+			  {
+				 if(verificarhoy( dd, mm, aa, fechahoy)==false)
+				     cout<<" Menor de edad ";
+				 return K;
+			  }
+			  else
+				  K=false;
+			else 
+				if (mm==4 || mm==6|| mm==9|| mm==11)
+				   if(dd>=1 && dd<=30)
+					{  if (verificarhoy( dd, mm, aa, fechahoy)==false)
+					      cout<<" Menor de edad ";
+					   return K;
+					} 
+					else 
+						K=false;
+				else // Febrero
+				   if (aa%4==0 && aa%100!=100 || aa%400==0 )
+					  if(dd>=1 && dd<=29)
+					  {
+						  if(verificarhoy( dd, mm, aa, fechahoy)==false)
+									cout<<" Menor de edad ";
+						  return K;
+					  }
+		           	  else
+						  K=false;
+				   else
+					  if(dd>=1 && dd<=28)
+						{
+							if(verificarhoy( dd, mm, aa, fechahoy)==false)
+									cout<<" Menor de edad ";
+							return K;
+						 }
+					  else
+							K=false;
+		else
+			K=false;
+	}
+	else 
+	  K=false;
+	return K;
+}
+
+bool verificarhoy(int dd,int mm,int aa,string fechahoy)
+{	
+	bool z=true;  //Bandera condicion que su cumple
+	int dd1=(atoi(fechahoy.substr(0,2).c_str()));
+	int mm1=(atoi(fechahoy.substr(3,2).c_str()));
+	int aa1=(atoi(fechahoy.substr(6,4).c_str()));
+	if (aa1-aa<18) // Logica negativa
+		return false;
+	else
+		if (aa1-aa==18)
+			if (mm1-mm<0)
+				return false;
+			else
+				if	(dd1-dd<0)
+					return false;
+	return z;
+	
+}
