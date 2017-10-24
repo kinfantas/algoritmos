@@ -1,0 +1,59 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+bool fecha_valida(int d,int m, int a);
+
+void main()
+{
+	int d,m,a;
+	bool flag;
+	do{
+		cout<<"Ingrese el dia";
+		cin>>d;
+		cout<<"Ingrese el mes";
+		cin>>m;
+		cout<<"Ingrese el año";
+		cin>>a;
+		flag=fecha_valida(d,m,a);//La llamada de la funcion
+		if (flag==true)
+			cout<<"Es una fecha valida";
+		else
+			cout<<"Es una fecha no valida";
+	}
+	while (flag==false);
+     getch();
+}
+
+bool fecha_valida(int d,int m, int a)
+{
+   bool t=true;
+   if(m>=1 && m<=12){
+	   if(m==1 || m==3 || m==5 || m==7 || m==8 || m==10 || m==12)
+	     if (d>=1 && d<=31)
+		   return t;
+	     else 
+		   t=false;
+	   else
+		   if (m==4 || m== 6 || m==9 || m==11)
+	           if(d>=1 && d<=30)
+				   return t;
+		       else 
+				   t=false;
+		   else 
+			   //febrero
+			   if(a%400==0 || (a%4==0 && a%100!=0))
+				  if (d>=1 && d<=29)
+					  return t;
+				  else 
+					  t=false;
+			   else
+				   if (d>=1 && d<=28)
+					   return t;
+				   else 
+					   t=false;
+   }
+   else
+	   t=false;
+   return t;
+}
