@@ -60,7 +60,7 @@ void multiplicarMatrices(int A[N][M], int n1,int m1, int B[N][M],int n2, int m2,
 		for(j=0; j<m2; j++){
 			acum=0;
 			for (k=0; k<m1 ;k++){
-				acum=acum + (A[i][j]*B[i][j]);
+				acum=acum + (A[i][k]*B[k][j]);
 			}
 			C[i][j]=acum;
 		}
