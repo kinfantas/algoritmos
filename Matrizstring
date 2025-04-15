@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+
+#define MAX 20
+
+using namespace std;
+
+// Prototipos de funciones
+void cargarMatriz(string v[MAX][MAX], int n, int m, string palabra, int aux);
+void mostrarMatriz(string v[MAX][MAX], int n, int m);
+
+int main() {
+    string v[MAX][MAX];
+    string palabra;
+    int n, m, aux = 0;
+
+    // Validación del número de filas
+    do {
+        cout << "Por favor, ingrese el número de filas: ";
+        cin >> n;
+        if (n <= 0 || n > 20)
+            cout << "ERROR. Ingresar de nuevo." << endl;
+    } while (n <= 0 || n > 20);
+
+    // Validación del número de columnas
+    do {
+        cout << "Por favor, ingrese el número de columnas: ";
+        cin >> m;
+        if (m <= 0 || m > 20)
+            cout << "ERROR. Ingresar de nuevo." << endl;
+    } while (m <= 0 || m > 20);
+
+    // Limpiar buffer de entrada
+    cin.ignore();
+
+    // Ingreso de la palabra
+    cout << "Por favor, ingrese la respectiva palabra: ";
+    getline(cin, palabra);
+
+    // Llamada a funciones
+    cargarMatriz(v, n, m, palabra, aux);
+    mostrarMatriz(v, n, m);
+
+    return 0;
+}
+
+// Carga la matriz con la palabra repetida en cada fila
+void cargarMatriz(string v[MAX][MAX], int n, int m, string palabra, int aux) {
+    for (int i = 0; i < n; i++) {          // filas
+        for (int j = 0; j < m; j++) {      // columnas
+            if (aux < palabra.length()) {
+                v[i][j] = palabra.at(aux);
+                aux++;
+            } else {
+                v[i][j] = " ";
+            }
+        }
+    }
+}
+
+// Muestra la matriz
+void mostrarMatriz(string v[MAX][MAX], int n, int m) {
+    cout << "\nMatriz resultante:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout << v[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
