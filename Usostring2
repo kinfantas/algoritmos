@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Empleado {
+private:
+    string nombre;
+    string apellido;
+    string correo;
+    string cargo;
+
+public:
+    Empleado(string n, string a, string c) {
+        nombre = n;
+        apellido = a;
+        cargo = c;
+        generarCorreo();
+    }
+
+    void generarCorreo() {
+        // ejemplo de uso de string: concatenar, convertir a minúscula
+        correo = nombre + "." + apellido + "@empresa.com";
+
+        // Convertimos a minúscula (simplificado: solo la primera letra)
+        if (correo[0] >= 'A' && correo[0] <= 'Z') {
+            correo[0] += 32;
+        }
+    }
+
+    void mostrarInformacion() {
+        cout << "Nombre completo: " << nombre << " " << apellido << endl;
+        cout << "Correo: " << correo << endl;
+        cout << "Cargo: " << cargo << endl;
+        cout << "Longitud del nombre: " << nombre.length() << endl;
+        cout << "Inicial del apellido: " << apellido.substr(0, 1) << endl;
+        cout << "¿'@' está en el correo?: ";
+        cout << (correo.find('@') != string::npos ? "Sí" : "No") << endl;
+        cout << endl;
+    }
+
+    void cambiarCargo(string nuevoCargo) {
+        cout << "Cargo anterior: " << cargo << endl;
+        cargo = nuevoCargo;
+        cout << "Cargo actualizado: " << cargo << endl << endl;
+    }
+
+    void corregirApellido(string nuevoApellido) {
+        cout << "Corrigiendo apellido..." << endl;
+        apellido = nuevoApellido;
+        generarCorreo(); // regeneramos correo
+    }
+
+    void depurarNombre() {
+        cout << "Nombre original: " << nombre << endl;
+        if (!nombre.empty()) {
+            nombre.erase(0, 1); // eliminar primera letra
+            nombre.insert(0, "Sr. "); // insertar título
+        }
+        cout << "Nombre después de depurar: " << nombre << endl;
+    }
+};
+
+int main() {
+    Empleado e1("Juan", "Perez", "Analista");
+
+    e1.mostrarInformacion();
+
+    e1.cambiarCargo("Jefe de Proyecto");
+
+    e1.corregirApellido("Peréz-Ramirez");
+
+    e1.mostrarInformacion();
+
+    e1.depurarNombre();
+
+    return 0;
+}
