@@ -1,0 +1,87 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+#define MAX 10
+
+class Fila {
+private:
+    string elementos[MAX];
+
+public:
+    void set(int i, string valor) {
+        elementos[i] = valor;
+    }
+
+    string get(int i) {
+        return elementos[i];
+    }
+
+    void mostrar(int n) {
+        for (int i = 0; i < n; i++) {
+            cout << elementos[i] << "\t";
+        }
+        cout << endl;
+    }
+};
+
+class Matriz {
+private:
+    Fila filas[MAX];
+    int totalFilas;
+    int columnas;
+
+public:
+    Matriz(int totalFilas_, int columnas_) {
+        totalFilas = totalFilas_;
+        columnas = columnas_;
+    }
+
+    void setDato(int i, int j, string valor) {
+        filas[i].set(j, valor);
+    }
+
+    string getDato(int i, int j) {
+        return filas[i].get(j);
+    }
+
+    void mostrar() {
+        for (int i = 0; i < totalFilas; i++) {
+            filas[i].mostrar(columnas);
+        }
+    }
+};
+
+// Función que genera la matriz final a partir del "vector de vectores"
+void procesarDatos(Fila entrada[], int n, Matriz &salida) {
+    int filaSalida = 0;
+    for (int i = 0; i < n; i++) {        // recorrer filas de entrada
+        for (int j = 0; j < n; j++) {    // recorrer columnas
+            string valor = entrada[i].get(j);
+            for (int k = 0; k < n; k++) {
+                salida.setDato(filaSalida, k, valor);
+            }
+            filaSalida++;
+        }
+    }
+}
+
+int main() {
+    const int n = 3;
+    Fila entrada[MAX];
+
+    // Cargamos los datos manualmente en entrada
+    entrada[0].set(0, "bo"); entrada[0].set(1, "li"); entrada[0].set(2, "via");
+    entrada[1].set(0, "da"); entrada[1].set(1, "ya"); entrada[1].set(2, "na");
+    entrada[2].set(0, "8");  entrada[2].set(1, "13"); entrada[2].set(2, "21");
+
+    // Creamos matriz de salida n*n
+    Matriz salida(n * n, n);
+
+    procesarDatos(entrada, n, salida);
+
+    cout << "Matriz Generada:" << endl;
+    salida.mostrar();
+
+    return 0;
+}
